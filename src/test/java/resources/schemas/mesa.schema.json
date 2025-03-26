@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "required": [
+    "id",
+    "restaurante",
+    "numero",
+    "dataHora",
+    "estado",
+    "confirmacao"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "restaurante": {
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "localizacao",
+        "tipoCozinha",
+        "horario",
+        "capacidade",
+        "avaliacao",
+        "comentario"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "localizacao": {
+          "type": "string"
+        },
+        "tipoCozinha": {
+          "type": "string"
+        },
+        "horario": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capacidade": {
+          "type": "integer"
+        },
+        "avaliacao": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "comentario": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "numero": {
+      "type": "integer"
+    },
+    "dataHora": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estado": {
+      "type": "array",
+      "items": {
+        "type": "boolean"
+      }
+    },
+    "confirmacao": {
+      "type": "array",
+      "items": {
+        "type": "boolean"
+      }
+    }
+  }
+}

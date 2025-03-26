@@ -1,0 +1,11 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password: password
+    url: jdbc:postgresql://localhost:5432/backend
+    jpa:
+      hibernate:
+        ddl-auto: true
