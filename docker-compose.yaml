@@ -19,6 +19,6 @@ services:
     image: 'postgres:latest'
     container_name: 'database'
     environment:
-      - POSTGRES_USER:root
-      - POSTGRES_PASSWORD:password
-      - POSTGRES_DB:backend
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=backend
