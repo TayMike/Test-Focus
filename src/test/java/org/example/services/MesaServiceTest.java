@@ -128,7 +128,7 @@ public class MesaServiceTest {
         UUID restauranteId = mesa.getRestaurante().getId();
         List<Mesa> mesasExistentes = List.of(Mesa.builder().numero(1).build());
         when(restauranteService.procurarPeloId(restauranteId)).thenReturn(Optional.of(restaurante));
-        when(mesaService.encontrarTodos(restauranteId)).thenReturn(Optional.of(mesasExistentes));
+        when(mesaService.encontrarTodos(restauranteId)).thenReturn(mesasExistentes);
 
         // Act & Assert
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {

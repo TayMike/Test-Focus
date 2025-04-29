@@ -27,5 +27,5 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, UUID> 
 
     // Query to find a Restaurante by its cuisine type with pagination
     @Query("SELECT r FROM Restaurante r WHERE r.tipoCozinha = :tipoCozinha")
-    Optional<Page<Restaurante>> findByCuisineType(String tipoCozinha, Pageable pageable);
+    Page<Restaurante> findByCuisineType(String tipoCozinha, Pageable pageable);
 }

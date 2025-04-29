@@ -57,16 +57,14 @@ public class MesaRepositoryIT {
 
     @Test
     public void testFindByRestauranteID_Success() {
-        Optional<List<Mesa>> mesas = mesaRepository.findByRestauranteID(restaurante.getId());
-
-        assertTrue(mesas.isPresent());
-        assertEquals(2, mesas.get().size());
+        List<Mesa> mesas = mesaRepository.findByRestauranteID(restaurante.getId());
+        assertEquals(2, mesas.size());
     }
 
     @Test
     public void testFindByRestauranteID_NotFound() {
-        Optional<List<Mesa>> mesas = mesaRepository.findByRestauranteID(UUID.fromString("5697acc9-297d-4999-b8ec-c736a34b5abd"));
-        assertTrue(mesas.get().isEmpty());
+        List<Mesa> mesas = mesaRepository.findByRestauranteID(UUID.fromString("5697acc9-297d-4999-b8ec-c736a34b5abd"));
+        assertTrue(mesas.isEmpty());
     }
 
     @Test

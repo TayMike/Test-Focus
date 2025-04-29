@@ -87,17 +87,15 @@ public class RestauranteRepositoryIT {
     @Test
     public void testFindByCuisineType_Pageable_Success() {
         Pageable pageable = PageRequest.of(0, 1);
-        Optional<Page<Restaurante>> pageResult = restauranteRepository.findByCuisineType("Italiana", pageable);
-        assertTrue(pageResult.isPresent());
-        assertEquals(1, pageResult.get().getTotalElements());
+        Page<Restaurante> pageResult = restauranteRepository.findByCuisineType("Italiana", pageable);
+        assertEquals(1, pageResult.getTotalElements());
     }
 
     @Test
     public void testFindByCuisineType_Pageable_NoResults() {
         Pageable pageable = PageRequest.of(0, 1);
-        Optional<Page<Restaurante>> pageResult = restauranteRepository.findByCuisineType("Mexicana", pageable);
-        assertTrue(pageResult.isPresent());
-        assertEquals(0, pageResult.get().getTotalElements());
+        Page<Restaurante> pageResult = restauranteRepository.findByCuisineType("Mexicana", pageable);
+        assertEquals(0, pageResult.getTotalElements());
     }
 
     @Test

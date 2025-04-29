@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface MesaRepository extends JpaRepository<Mesa, UUID> {
 
     @Query("SELECT m FROM Mesa m WHERE m.restaurante.id = :restauranteId")
-    Optional<List<Mesa>> findByRestauranteID(UUID restauranteId);
+    List<Mesa> findByRestauranteID(UUID restauranteId);
 
     @Query("SELECT m FROM Mesa m WHERE m.restaurante.id = :restauranteId AND m.numero = :numeroMesa")
     Optional<Mesa> findByTableNumber(UUID restauranteId, Integer numeroMesa);

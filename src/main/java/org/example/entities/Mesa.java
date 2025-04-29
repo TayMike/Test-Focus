@@ -1,15 +1,18 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Builder
@@ -21,7 +24,7 @@ public class Mesa {
     private UUID id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "restaurante_id", nullable = false)
+    @JoinColumn(name = "restauranteid", nullable = false)
     private Restaurante restaurante;
 
     @Version
@@ -32,17 +35,17 @@ public class Mesa {
     private Integer numero;
 
     @ElementCollection
-    @CollectionTable(name = "mesa_datahora", joinColumns = @JoinColumn(name = "mesa_id"))
+    @CollectionTable(name = "mesadatahora", joinColumns = @JoinColumn(name = "mesa_id"))
     @Column(name = "data_hora")
     private List<LocalDateTime> dataHora;
 
     @ElementCollection
-    @CollectionTable(name = "mesa_estado", joinColumns = @JoinColumn(name = "mesa_id"))
+    @CollectionTable(name = "mesaestado", joinColumns = @JoinColumn(name = "mesa_id"))
     @Column(name = "estado")
     private List<Boolean> estado;
 
     @ElementCollection
-    @CollectionTable(name = "mesa_confirmacao", joinColumns = @JoinColumn(name = "mesa_id"))
+    @CollectionTable(name = "mesaconfirmacao", joinColumns = @JoinColumn(name = "mesa_id"))
     @Column(name = "confirmacao")
     private List<Boolean> confirmacao;
 

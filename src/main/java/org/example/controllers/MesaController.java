@@ -21,7 +21,7 @@ public class MesaController {
     @PostMapping("/cadastrar")
     public ResponseEntity<String> cadastrarMesa(@RequestBody Mesa mesa) {
         try {
-            Mesa novaMesa = mesaService.cadastrarMesa(mesa);
+            mesaService.cadastrarMesa(mesa);
             return ResponseEntity.status(HttpStatus.CREATED).body("Mesa cadastrada com sucesso!");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -40,10 +40,13 @@ public class MesaController {
 
     @GetMapping("/restaurante/{restauranteId}")
     public ResponseEntity<List<Mesa>> encontrarTodasAsMesas(@PathVariable UUID restauranteId) {
-        Optional<List<Mesa>> mesas = mesaService.encontrarTodos(restauranteId);
-        return mesas.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        List<Mesa> mesas = mesaService.encontrarTodos(restauranteId);
+        if (mesas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(mesas);
     }
+
 
     @GetMapping("/restaurante/{restauranteId}/numero/{numero}")
     public ResponseEntity<Mesa> encontrarPeloNumeroDaMesa(

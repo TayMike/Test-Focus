@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -124,7 +125,7 @@ class MesaControllerTest {
     @Test
     void testEncontrarTodasAsMesas_Success() throws Exception {
         // Arrange
-        when(mesaService.encontrarTodos(restauranteId)).thenReturn(Optional.of(List.of(mesa)));
+        when(mesaService.encontrarTodos(restauranteId)).thenReturn(List.of(mesa));
 
         // Act & Assert
         mockMvc.perform(get("/mesas/restaurante/{restauranteId}", restauranteId))
@@ -137,7 +138,7 @@ class MesaControllerTest {
     @Test
     void testEncontrarTodasAsMesas_NotFound() throws Exception {
         // Arrange
-        when(mesaService.encontrarTodos(restauranteId)).thenReturn(Optional.empty());
+        when(mesaService.encontrarTodos(restauranteId)).thenReturn(Collections.emptyList());
 
         // Act & Assert
         mockMvc.perform(get("/mesas/restaurante/{restauranteId}", restauranteId))

@@ -1,6 +1,5 @@
 package org.example.services;
 
-import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
 import org.example.entities.Mesa;
 import org.example.entities.Restaurante;
@@ -11,10 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class MesaService {
@@ -32,17 +28,13 @@ public class MesaService {
         Optional<Restaurante> restauranteOpcional = restauranteService.procurarPeloId(restauranteId);
         Restaurante restaurante = restauranteOpcional.orElse(null);
         if (restaurante != null) {
-            Optional<List<Mesa>> lista = this.encontrarTodos(restauranteId);
+            List<Mesa> lista = this.encontrarTodos(restauranteId);
             if (restaurante.getCapacidade() >= mesa.getNumero()) {
-                if (lista.isPresent()) {
-                    List<Mesa> listaVerificada = lista.get().stream().filter(mesa1 -> mesa1.getNumero() == mesa.getNumero()).toList();
-                    if (listaVerificada.isEmpty()){
-                        return mesaRepository.save(mesa);
-                    } else {
-                        throw new IllegalArgumentException("Mesa já cadastrada.");
-                    }
-                } else {
+                List<Mesa> listaVerificada = lista.stream().filter(mesa1 -> Objects.equals(mesa1.getNumero(), mesa.getNumero())).toList();
+                if (listaVerificada.isEmpty()){
                     return mesaRepository.save(mesa);
+                } else {
+                    throw new IllegalArgumentException("Mesa já cadastrada.");
                 }
             } else {
                 throw new IllegalArgumentException("O restaurante não tem capacidade suficiente para essa nova mesa");
@@ -84,7 +76,7 @@ public class MesaService {
         }
     }
 
-    public Optional<List<Mesa>> encontrarTodos(UUID restauranteID) {
+    public List<Mesa> encontrarTodos(UUID restauranteID) {
         return mesaRepository.findByRestauranteID(restauranteID);
     }
 
